@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>REST Countries API</title>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <nav>
+          <div class="logo"><h1>Where In The World?</h1></div>
+          <button id="dark-mode-btn" class="dark-mode-btn">
+            <i class="ri-moon-line">Dark Mode</i>
+          </button>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <div class="container">
+        <div class="user-input">
+          <div class="search-box">
+            <i class="ri-search-line"></i>
+            <input
+              type="text"
+              id="search-input"
+              placeholder="Search For A Country..."
+            />
+          </div>
+          <div class="select-box">
+            <select name="filter-input" id="filter-input">
+              <option value="default">Filter By Region</option>
+              <option value="africa">Africa</option>
+              <option value="america">America</option>
+              <option value="asia">Asia</option>
+              <option value="europe">Europe</option>
+              <option value="oceania">Oceania</option>
+            </select>
+          </div>
+        </div>
+        <div id="country-list-container" class="country-list-container"></div>
+        <div id="country-detail-conainer" class="contry-detail-container"></div>
+      </div>
+    </main>
+    <script src="main.js"></script>
+  </body>
+</html>
