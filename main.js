@@ -80,7 +80,6 @@ async function fetchCountries() {
 
 function displayCountry(countries) {
   countryListContainer.innerHTML = "";
-
   countries.forEach((country) => {
     const countryItem = document.createElement("button");
     countryItem.className = "country-item";
@@ -97,12 +96,8 @@ function displayCountry(countries) {
     `;
 
     countryItem.addEventListener("click", () => {
-      countryListContainer.classList.remove("show");
-      countryListContainer.classList.add("hidden");
-
-      countryDetailContainer.classList.remove("hidden");
-      countryDetailContainer.classList.add("show");
-
+     countryListContainer.style.display = "none";
+document.getElementById("country-detail-container").classList.add("show");
       displayCountryDetail(country);
     });
 
@@ -111,13 +106,18 @@ function displayCountry(countries) {
 }
 
 function displayCountryDetail(country) {
-  countryDetailContainer.innerHTML = `
+  const countryDetailContainer = document.getElementById(
+    "country-detail-container")
+
+    countryDetailContainer.innerHTML = `
+   
     <button id="back-btn" class="back-btn"><i class="ri-arrow-left-line"></i> Back</button>
+
     <div class="country-information">
       <div class="country-flag">
         <img src="${country.flags.svg}" alt="${country.name.common}">
       </div>
-      <div class="country-detail">
+      <div class="country-details ">
         <h1>${country.name.common}</h1>
         <ul>
           <li><strong>Native Name:</strong> ${
@@ -148,7 +148,7 @@ function displayCountryDetail(country) {
         ${
           country.borders?.length
             ? `<div class="country-borders">
-                <strong>Border Countries:</strong>
+                <strong>Border Countries: </strong>
                 <div class="border-list">
                   ${country.borders
                     .map(
@@ -164,14 +164,12 @@ function displayCountryDetail(country) {
     </div>
   `;
 
-  const backBtn = document.getElementById("back-btn");
+  const backBtn = countryDetailContainer.querySelector("#back-btn");
   backBtn.addEventListener("click", () => {
     countryDetailContainer.innerHTML = "";
     countryDetailContainer.classList.remove("show");
-    countryDetailContainer.classList.add("hidden");
-
-    countryListContainer.classList.remove("hidden");
-    countryListContainer.classList.add("show");
+    
+    countryListContainer.style.display = "grid";
   });
 }
 
