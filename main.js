@@ -30,6 +30,15 @@ const countryDetailContainer = document.getElementById(
 
 let allCountries = [];
 
+// 🔤 ADDED: consistent, locale-aware alphabetical sorting
+function sortCountries(list) {
+  return [...list].sort((a, b) =>
+    a.name.common.localeCompare(b.name.common, undefined, {
+      sensitivity: "base",
+    })
+  );
+}
+
 searchInput.addEventListener("input", updateCountryResults);
 filterRegionDropdown.addEventListener("change", updateCountryResults);
 
@@ -61,7 +70,8 @@ function updateCountryResults() {
 
   results = searchResults(results, searchTerm);
 
-  displayCountry(results);
+  // 🔤 ADDED: sort results before displaying
+  displayCountry(sortCountries(results));
 }
 
 async function fetchCountries() {
@@ -72,6 +82,10 @@ async function fetchCountries() {
     if (!response.ok) throw new Error("Network response was not ok");
 
     allCountries = await response.json();
+
+    // 🔤 ADDED: sort once for initial render
+    allCountries = sortCountries(allCountries);
+
     displayCountry(allCountries);
   } catch (err) {
     console.error("Error fetching countries:", err);
@@ -96,8 +110,8 @@ function displayCountry(countries) {
     `;
 
     countryItem.addEventListener("click", () => {
-     countryListContainer.style.display = "none";
-document.getElementById("country-detail-container").classList.add("show");
+      countryListContainer.style.display = "none";
+      document.getElementById("country-detail-container").classList.add("show");
       displayCountryDetail(country);
     });
 
@@ -107,10 +121,10 @@ document.getElementById("country-detail-container").classList.add("show");
 
 function displayCountryDetail(country) {
   const countryDetailContainer = document.getElementById(
-    "country-detail-container")
+    "country-detail-container"
+  );
 
-    countryDetailContainer.innerHTML = `
-   
+  countryDetailContainer.innerHTML = `
     <button id="back-btn" class="back-btn"><i class="ri-arrow-left-line"></i> Back</button>
 
     <div class="country-information">
@@ -168,7 +182,6 @@ function displayCountryDetail(country) {
   backBtn.addEventListener("click", () => {
     countryDetailContainer.innerHTML = "";
     countryDetailContainer.classList.remove("show");
-    
     countryListContainer.style.display = "grid";
   });
 }

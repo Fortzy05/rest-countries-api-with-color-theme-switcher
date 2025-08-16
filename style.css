@@ -49,6 +49,11 @@ header nav {
     align-items: center;
 }
 
+header nav .logo {
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--text-color);
+}
 .dark-mode-btn {
     cursor: pointer;
     background: transparent;
@@ -187,6 +192,8 @@ main {
 
 .country-detail-container .country-information .country-details .country-borders strong {
     margin-right: .5rem;
+    display: block;
+        margin-bottom: 1rem;
     ;
 }
 
@@ -250,8 +257,10 @@ main {
    .container {
         width: 85%;
     }
-   .header {
-    font-size: .75rem;
+   header nav .logo {
+    font-size: .8rem;
+    text-wrap: nowrap;
+    font-weight: 800;
    }
    .dark-mode-btn {
         font-size: .9rem;
@@ -260,6 +269,7 @@ main {
     .country-list-container {
         grid-template-columns: 1fr;
         gap: 2rem;
+      
 
     }
 }
